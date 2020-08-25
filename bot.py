@@ -1,3 +1,7 @@
+
+
+
+  
 import requests as requests
 import random
 import json
@@ -8,8 +12,8 @@ import telegram
 from telegram.error import NetworkError, Unauthorized
 from time import sleep
 
-url = "https://api.telegram.org/bot1169572672:AAGRtTwnzVHkc2PEzDm_nyTgmtO0w5B_0rs/"
-token = "1169572672:AAGRtTwnzVHkc2PEzDm_nyTgmtO0w5B_0rs"
+url = "https://api.telegram.org/bot1348271923:AAHUWMcpedhix24xVPKuuuhk-z5c8burYKo/"
+token = "1348271923:AAHUWMcpedhix24xVPKuuuhk-z5c8burYKo"
 filename = r"C:\Users\user\Desktop\logy ai\telegrambot.json"
 global update_id
 
@@ -49,13 +53,15 @@ def main():
 
     try:
         update_id = last_update(url)["update_id"]
+
     except IndexError:
         update_id = None
 
+    print(update_id)
     #update_id = last_update(url)["update_id"]
     logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
-    while update_id > 1:
+    while True:
 
         try:
             update = last_update(url)
@@ -63,9 +69,13 @@ def main():
 
                 if get_message_text(update).lower() == "/start" or get_message_text(update).lower() == "hi" or get_message_text(update).lower() == "hello":
                     bot.send_message(get_chat_id(update), 'Hello Welcome to our bot.')
+
+                    keyboard = types.ReplyKeyboardMarkup(True)
+                    keyboard.row('want', 'donot want')
+                    bot.send_message(get_chat_id(update), 'want to book an appointment?',reply_markup=keyboard)
                     data[update_id] = get_message_text(update).lower()
 
-                elif get_message_text(update).lower() == "i want to book an appointment":
+                elif get_message_text(update).lower() == "want":
 
                     keyboard = types.ReplyKeyboardMarkup(True)
                     keyboard.row('general', 'specialist')
@@ -89,11 +99,13 @@ def main():
                     data[update_id] = get_message_text(update).lower()
 
                 elif get_message_text(update).lower() == "yes" and update_id == temp + 1:
+
                     bot.send_message(get_chat_id(update), 'okay here is the payment link pls pay, thank you for the payment here is the link online consultation',reply_markup=types.ReplyKeyboardRemove())
                     data[update_id] = get_message_text(update).lower()
 
                 elif get_message_text(update).lower() == "no" and update_id == temp + 1:
-                    #keyboard = types.ReplyKeyboardMarkup(True)
+
+                    keyboard = types.ReplyKeyboardMarkup(True)
                     keyboard.row('yes', 'no')
                     bot.send_message(get_chat_id(update), text="would you like to see the doctor later?", reply_markup=keyboard)
                     #send_message(get_chat_id(update), 'would you like to see the doctor later?')
@@ -102,7 +114,7 @@ def main():
 
                 elif get_message_text(update).lower() == "yes" and update_id == temp1 + 1:
 
-                    #keyboard = telebot.types.ReplyKeyboardMarkup(True)
+                    keyboard = types.ReplyKeyboardMarkup(True)
                     keyboard.row('15-08', '19-08',"20-08")
                     bot.send_message(get_chat_id(update), text="thses are the possible date and time of the appoitment please choose one", reply_markup=keyboard)
                     #keyboard = types.ReplyKeyboardRemove(selective=False)
@@ -111,19 +123,25 @@ def main():
                 elif get_message_text(update) == "19-08" or get_message_text(update) == "02-08" or get_message_text(update) == "15-08":
                    
                     bot.send_message(get_chat_id(update), 'okay here is the payment link pls pay, thank you for the payment here is the link online consultation',reply_markup=types.ReplyKeyboardRemove())
-                    update_id = 0
+                    #update_id = 0
                     data[update_id] = get_message_text(update).lower()
             
+                elif get_message_text(update) == 'donot want':
+
+                    bot.send_message(get_chat_id(update), 'okay bye..see you again',reply_markup=types.ReplyKeyboardRemove())
+                    #update_id = 0
+                    data[update_id] = get_message_text(update).lower()
+
                 else:
 
                     bot.send_message(get_chat_id(update), 'okay bye..see you again',reply_markup=types.ReplyKeyboardRemove())
-                    update_id = 0
+                    #update_id = 0
                     data[update_id] = get_message_text(update).lower()
 
                 update_id += 1
 
         except NetworkError:
-            sleep(1)
+            sleep(10)
         except Unauthorized:
             # The user has removed or blocked the bot.
             update_id += 1
@@ -133,4 +151,4 @@ def main():
 # call the function to make it reply
 main()
 with open(filename, "w") as outfile:  
-    json.dump(data, outfile) 
+    json.dump(data, outfile)

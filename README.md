@@ -19,3 +19,6 @@ The goal of the project is to make HTTP requests simpler and more human-friendly
 Python has a built-in package called json , which can be used to work with JSON data.
 
 I used it to save the chat logg in a json file for future use
+
+
+# In workflow.jpg file described the dialogue work flow of this chat bot

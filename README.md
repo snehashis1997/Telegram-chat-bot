@@ -12,6 +12,6 @@ This is a Telegram medical assistant bot.
 # In workflow.jpg file described the dialogue work flow of this chat bot
 
 <p align="center">
-  <img src="https://github.com/snehashis1997/Telegram-chat-bot/blob/master/workflow.jpeg" width="500" height="600"/>
+  <img src="https://github.com/snehashis1997/Telegram-chat-bot/blob/master/workflow.jpeg" width="1111" height="1280"/>
 </p>
 

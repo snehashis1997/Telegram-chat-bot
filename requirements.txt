@@ -19,7 +19,7 @@ pycparser==2.20
 pyparsing==2.4.7
 pyTelegramBotAPI==3.7.3
 python-telegram-bot==12.8
-requests>=2.20.0
+requests==2.20.0
 resampy==0.2.2
 scikit-learn==0.23.2
 scipy==1.5.2

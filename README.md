@@ -22,3 +22,8 @@ I used it to save the chat logg in a json file for future use
 
 
 # In workflow.jpg file described the dialogue work flow of this chat bot
+
+<p align="center">
+  <img src="https://github.com/snehashis1997/Telegram-chat-bot/blob/master/workflow.jpeg" width="200" height="200"/>
+</p>
+
